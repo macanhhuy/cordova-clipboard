@@ -5,6 +5,7 @@
 
 - (void)copy:(CDVInvokedUrlCommand*)command;
 - (void)paste:(CDVInvokedUrlCommand*)command;
+- (void)pasteHTML:(CDVInvokedUrlCommand*)command;
 - (void)clear:(CDVInvokedUrlCommand*)command;
 
 @end

@@ -16,6 +16,7 @@ public class Clipboard extends CordovaPlugin {
 
     private static final String actionCopy = "copy";
     private static final String actionPaste = "paste";
+    private static final String actionPasteHTML = "pasteHTML";
     private static final String actionClear = "clear";
 
     @Override
@@ -45,6 +46,21 @@ public class Clipboard extends CordovaPlugin {
                 if (clip != null) {
                     ClipData.Item item = clip.getItemAt(0);
                     text = item.getText().toString();
+                }
+                callbackContext.success(text);
+
+                return true;
+            } catch (Exception e) {
+                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.toString()));
+            }
+        } else if (action.equals(actionPasteHTML)) {
+            try {
+                String text = "";
+                
+                ClipData clip = clipboard.getPrimaryClip();
+                if (clip != null) {
+                    ClipData.Item item = clip.getItemAt(0);
+                    text = item.getHtmlText().toString();
                 }
                 callbackContext.success(text);
 
